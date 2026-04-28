@@ -1,0 +1,5 @@
+test/*
+nodemodules/*
+Dockerfile
+.prettierrc
+.eslint.config.mjs
