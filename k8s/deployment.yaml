@@ -16,6 +16,7 @@ spec:
       containers:
       - name: app-ts
         image: paulolemosdev/app-ts:v1
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "64Mi"
