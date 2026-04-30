@@ -4,7 +4,12 @@ kind: Deployment
 metadata:
   name: app-ts
 spec:
-  replicas: 2
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
   selector:
     matchLabels:
       api: app-ts
@@ -15,7 +20,7 @@ spec:
     spec:
       containers:
       - name: app-ts
-        image: paulolemosdev/app-ts:v1
+        image: paulolemosdev/app-ts:v2
         imagePullPolicy: IfNotPresent
         resources:
           requests:
