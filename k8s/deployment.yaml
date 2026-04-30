@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: app-ts
-          image: paulolemosdev/app-ts:v3
+          image: paulolemosdev/app-ts:v4
           imagePullPolicy: IfNotPresent
           env:
             - name: APP
@@ -28,6 +28,11 @@ spec:
                 configMapKeyRef:
                   key: app-name
                   name: app-ts
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: api-key
+                  name: app-ts-secrets
           resources:
             requests:
               memory: '64Mi'
