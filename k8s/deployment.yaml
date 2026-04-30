@@ -22,17 +22,22 @@ spec:
         - name: app-ts
           image: paulolemosdev/app-ts:v4
           imagePullPolicy: IfNotPresent
-          env:
-            - name: APP
-              valueFrom:
-                configMapKeyRef:
-                  key: app-name
-                  name: app-ts
-            - name: API_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: api-key
-                  name: app-ts-secrets
+          envFrom:
+            - configMapRef:
+                name: app-ts
+            - secretRef:
+                name: app-ts-secrets
+          # env:
+          #   - name: APP
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         key: app-name
+          #         name: app-ts
+          #   - name: API_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         key: api-key
+          #         name: app-ts-secrets
           resources:
             requests:
               memory: '64Mi'
