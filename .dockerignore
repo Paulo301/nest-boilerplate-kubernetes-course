@@ -3,3 +3,4 @@ nodemodules/*
 Dockerfile
 .prettierrc
 .eslint.config.mjs
+.env

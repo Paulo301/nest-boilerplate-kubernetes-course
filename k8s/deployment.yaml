@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: app-ts
 spec:
-  replicas: 10
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -19,15 +19,21 @@ spec:
         api: app-ts
     spec:
       containers:
-      - name: app-ts
-        image: paulolemosdev/app-ts:v2
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
-        ports:
-        - containerPort: 3000
+        - name: app-ts
+          image: paulolemosdev/app-ts:v3
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP
+              valueFrom:
+                configMapKeyRef:
+                  key: app-name
+                  name: app-ts
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '100m'
+            limits:
+              memory: '128Mi'
+              cpu: '200m'
+          ports:
+            - containerPort: 3000
